@@ -2,6 +2,7 @@ table{
     background-color: white;
     border-collapse: collapse;
     width: 50%;
+    margin-bottom: 30px;
 }
 th{
     background-color: lightcoral;
@@ -16,4 +17,14 @@ tr:nth-child(even){
 }
 tr{
     height: 40px;
+}
+
+input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#editForm {
+    width: 300px;
+    text-align: right;
 }

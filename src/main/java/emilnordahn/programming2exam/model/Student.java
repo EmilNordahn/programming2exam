@@ -1,8 +1,6 @@
 package emilnordahn.programming2exam.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.Nullable;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 
@@ -10,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "students")
 public class Student {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "student_id")
-    private Long studentID;
+    private Long studentId;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -22,8 +20,8 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long studentID, String firstName, String lastName, String email, Supervisor supervisor) {
-        this.studentID = studentID;
+    public Student(Long studentId, String firstName, String lastName, String email, Supervisor supervisor) {
+        this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,7 +31,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "studentID=" + studentID +
+                "studentID=" + studentId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
@@ -41,12 +39,12 @@ public class Student {
                 '}';
     }
 
-    public Long getStudentID() {
-        return studentID;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setStudentID(Long studentID) {
-        this.studentID = studentID;
+    public void setStudentId(Long studentID) {
+        this.studentId = studentID;
     }
 
     public String getFirstName() {

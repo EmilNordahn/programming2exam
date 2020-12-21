@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update supervisor</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css" th:href="@{/css/MyCSS.css}">
+</head>
+<body>
+<h1>Edit supervisor info:</h1>
+<form id="editForm" action="/saveSupervisor" method="post">
+    <label for="">First name</label>
+    <input type="text" placeholder="First name" id="firstName" name="firstName" th:value="${supervisor.getFirstName()}"><br>
+    <label for="">Last name</label>
+    <input type="text" placeholder="Last name" id="lastName" name="lastName" th:value="${supervisor.getLastName()}"><br>
+    <label for="">Email</label>
+    <input type="text" placeholder="Email" id="email" name="email" th:value="${supervisor.getEmail()}"><br>
+    <input type="submit" value="Add supervisor">
+</form>
+</body>
+</html>

@@ -1,9 +1,7 @@
 package emilnordahn.programming2exam.service.springdatajpa;
 
 import emilnordahn.programming2exam.model.Student;
-import emilnordahn.programming2exam.model.Supervisor;
 import emilnordahn.programming2exam.service.StudentService;
-import emilnordahn.programming2exam.service.SupervisorService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -33,21 +31,21 @@ class StudentJPATest {
         student = studentService.save(student);
 
         //Checker om den kan gemmes i DB
-        assertNotNull(student.getStudentID());
+        assertNotNull(student.getStudentId());
 
         //Checker at den kan læse fra DB
         assertTrue(studentService.findAll().size() > 0);
 
         //Checker om den kan finde den specifikke student baseret på ID
-        assertEquals(student.getStudentID(), studentService.findById(student.getStudentID()).get().getStudentID());
+        assertEquals(student.getStudentId(), studentService.findById(student.getStudentId()).get().getStudentId());
 
         //Checker om mail er opdateret i DB
         student.setEmail(testMail);
         student = studentService.save(student);
-        assertEquals(student.getEmail(), studentService.findById(student.getStudentID()).get().getEmail());
+        assertEquals(student.getEmail(), studentService.findById(student.getStudentId()).get().getEmail());
 
         //Checker om den kan slette Studenten fra DB
-        studentService.deleteById(student.getStudentID());
-        assertTrue(studentService.findById(student.getStudentID()).isEmpty());
+        studentService.deleteById(student.getStudentId());
+        assertTrue(studentService.findById(student.getStudentId()).isEmpty());
     }
 }

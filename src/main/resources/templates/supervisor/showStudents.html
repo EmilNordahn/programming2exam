@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="MyCSS.css" th:href="@{/css/MyCSS.css}">
+<head>
+    <meta charset="UTF-8">
+    <title>Show students</title>
+</head>
+<body>
+<h1 th:text="'Students for ' + ${supervisor.getFirstName()} + ' ' + ${supervisor.getLastName()}"></h1>
+<a href="/"><button>Go back</button></a>
+<table id="studentTable" style="width: 75%">
+    <colgroup>
+        <col width="30%">
+        <col width="25%">
+        <col width="25%">
+        <col width="20%">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Supervisor</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.getLastName()} + ', ' + ${student.getFirstName()}"></td>
+        <td th:text="${student.getEmail()}"></td>
+        <td th:if="${student.getSupervisor() != null}"
+            th:text="${student.getSupervisor.getSupervisorId()} + ': ' +
+                         ${student.getSupervisor.getLastName()} + ', ' +
+                         ${student.getSupervisor.getFirstName()}"></td>
+        <td th:if="${student.getSupervisor() == null}">No supervisor</td>
+        <td>
+            <a th:href="@{'/deleteStudent/' + ${student.getStudentId()}}" onclick="return confirm('Are you sure you want to delete the student?')">
+                <button>
+                    Delete
+                </button>
+            </a>
+            <a th:href="@{'/saveStudent/' + ${student.getStudentId()}}">
+                <button style="float: right">
+                    Update
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

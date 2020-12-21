@@ -6,6 +6,7 @@ import emilnordahn.programming2exam.service.SupervisorService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,5 +37,10 @@ public class SupervisorJPA implements SupervisorService {
     @Override
     public Optional<Supervisor> findById(Long aLong) {
         return sr.findById(aLong);
+    }
+
+    @Override
+    public List<Supervisor> findAllByOrderByLastNameAscFirstNameAsc() {
+        return sr.findAllByOrderByLastNameAscFirstNameAsc();
     }
 }

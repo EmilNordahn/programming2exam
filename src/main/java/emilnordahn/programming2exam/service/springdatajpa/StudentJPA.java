@@ -42,6 +42,11 @@ public class StudentJPA implements StudentService {
     }
 
     @Override
+    public List<Student> findAllByOrderByLastNameAscFirstNameAsc() {
+        return sr.findAllByOrderByLastNameAscFirstNameAsc();
+    }
+
+    @Override
     public List<Student> findAllBySupervisorOrderByLastNameAscFirstNameAsc(Supervisor supervisor) {
         return sr.findAllBySupervisorOrderByLastNameAscFirstNameAsc(supervisor);
     }
