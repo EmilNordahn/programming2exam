@@ -19,12 +19,34 @@
         <input type="text" placeholder="Last name" id="lastName"><br>
         <input type="text" placeholder="Email" id="email"><br>
 <!--        <input type="text" placeholder="Supervisor ID" id="supervisorId"><br>-->
-        <input type="submit" value="Add person" onclick="updateTable()">
+        <input type="submit" value="Add person">
     </form>
 </div>
 <div id="createStatus"></div>
 
-<div id="students"></div>
+<div id="status"></div>
+<div id="testStudent"></div>
+<div>
+    <table id="studentTable" style="width: 75%">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Supervisor</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.getFirstName()}"></td>
+            <td th:text="${student.getFirstName()}"></td>
+            <td th:text="${student.getFirstName()}"></td>
+            <td th:text="${student.getFirstName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <!--<div>-->
 <!--    <h1>List of students:</h1>-->
 <!--        <table id="studentTable" style="width: 75%">-->
@@ -60,7 +82,8 @@
 </div>
 <script type="text/javascript">
     checkJQuery();
-    preventCreateFormFromSending($("#createForm"))
+    preventCreateFormFromSending($("#createForm"));
+    getAllStudents();
 </script>
 </body>
 </html>

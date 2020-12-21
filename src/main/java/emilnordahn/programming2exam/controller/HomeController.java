@@ -13,6 +13,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model){
+        System.out.println("\nRunning index from homecontroller\n");
         model.addAttribute("students", studentService.findAll().toArray());
         return "index";
     }

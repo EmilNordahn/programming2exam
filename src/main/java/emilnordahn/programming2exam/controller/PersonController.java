@@ -8,6 +8,7 @@ import emilnordahn.programming2exam.service.utility.AJAXrequest;
 import emilnordahn.programming2exam.service.utility.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,11 @@ public class PersonController {
         this.supervisorService = supervisorService;
     }
 
-
+    @PostMapping("api/getStudents")
+    public ResponseEntity<Object[]> getSearchStudentsResult(){
+        System.out.println("api/getStudents called");
+        return ResponseEntity.ok(studentService.findAll().toArray());
+    }
 
     @PostMapping("api/add")
     public ResponseEntity<Result> getAddResult(@RequestBody AJAXrequest request) {

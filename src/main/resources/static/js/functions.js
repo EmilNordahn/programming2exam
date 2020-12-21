@@ -41,8 +41,11 @@ function addPerson(firstName , lastName, email, type){
             contentType: "application/JSON",
             data: JSON.stringify(createObject),
             success:function (data){
-                console.log("SUCCESS FROM SERVER")
-                $("#createStatus").html("Server: " + data.message);
+                $("#testStudent").prepend("<div>" + data.testStudent.pop().firstName + "</div>")
+
+
+                // console.log("SUCCESS FROM SERVER")
+                // $("#createStatus").html("Server: " + data.message);
             },
             error:function(data){
                 console.log("ERROR FROM SERVER")
@@ -51,11 +54,22 @@ function addPerson(firstName , lastName, email, type){
         });
 }
 
-function updateTable(){
-    var xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange =function (){
+function getAllStudents(){
+    console.log("getAllStudents called!");
 
-    }
+    $.ajax({
+        url: "api/getStudents",
+        type:"POST",
+        contentType: "application/JSON",
+        success:function (data){
+            $.each(data.students, function (index, value){
+                $("studentTable").append("<div>" + value.firstName)
+            })
+            $("#status").html("Server: got the student");
+        },
+        error:function (data){
+            console.log("ERROR getting the student");
+            $("#status").html("ERROR getting the student");
+        }
+    });
 }
-
