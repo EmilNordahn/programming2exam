@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link rel="stylesheet" type="text/css" href="MyCSS.css" th:href="@{/css/MyCSS.css}">
+    <script type="text/javascript" th:src="@{/js/functions.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <h1>Add student:</h1>
+    <select name="types" id="types" form="createForm">
+        <option value="student">Student</option>
+        <option value="supervisor">Supervisor</option>
+    </select>
+    <form id="createForm">
+        <input type="text" placeholder="First name" id="firstName"><br>
+        <input type="text" placeholder="Last name" id="lastName"><br>
+        <input type="text" placeholder="Email" id="email"><br>
+<!--        <input type="text" placeholder="Supervisor ID" id="supervisorId"><br>-->
+        <input type="submit" value="Add person" onclick="updateTable()">
+    </form>
+</div>
+<div id="createStatus"></div>
+
+<div id="students"></div>
+<!--<div>-->
+<!--    <h1>List of students:</h1>-->
+<!--        <table id="studentTable" style="width: 75%">-->
+<!--        <colgroup>-->
+<!--            <col width="30%">-->
+<!--            <col width="25%">-->
+<!--            <col width="30%">-->
+<!--            <col width="15%">-->
+<!--        </colgroup>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Supervisor</th>-->
+<!--            <th></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="student : ${students}">-->
+<!--            <td th:text="${student.getLastName()} + ', ' + ${student.getFirstName()}"></td>-->
+<!--            <td th:text="${student.getEmail()}"></td>-->
+<!--            <td th:if="${student.getSupervisor() != null}"-->
+<!--                th:text="${student.getSupervisor.getSupervisorId()} + ': ' +-->
+<!--                         ${student.getSupervisor.getLastName()} + ', ' +-->
+<!--                         ${student.getSupervisor.getFirstName()"></td>-->
+<!--            <td th:if="${student.getSupervisor() == null}">No supervisor</td>-->
+<!--            <td>-->
+<!--                <button>Yea</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+</div>
+<script type="text/javascript">
+    checkJQuery();
+    preventCreateFormFromSending($("#createForm"))
+</script>
+</body>
+</html>
