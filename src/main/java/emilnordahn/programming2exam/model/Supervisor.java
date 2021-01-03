@@ -63,7 +63,7 @@ public class Supervisor {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", students=" + students +
+//                ", students=" + students +
                 '}';
     }
 

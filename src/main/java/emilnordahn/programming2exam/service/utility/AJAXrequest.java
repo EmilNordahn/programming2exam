@@ -2,12 +2,15 @@ package emilnordahn.programming2exam.service.utility;
 
 import emilnordahn.programming2exam.model.Student;
 import emilnordahn.programming2exam.model.Supervisor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AJAXrequest {
+
     String firstName;
     String lastName;
     String email;
     String type;
+    Long sId;
 
     public AJAXrequest() {
     }
@@ -21,6 +24,7 @@ public class AJAXrequest {
         student.setFirstName(firstName);
         student.setLastName(lastName);
         student.setEmail(email);
+        student.setsId(sId);
         return student;
     }
 
@@ -39,7 +43,16 @@ public class AJAXrequest {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", type='" + type + '\'' +
+                ", sId=" + sId +
                 '}';
+    }
+
+    public Long getsId() {
+        return sId;
+    }
+
+    public void setsId(Long sId) {
+        this.sId = sId;
     }
 
     public String getFirstName() {

@@ -1,5 +1,6 @@
 package emilnordahn.programming2exam.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
@@ -14,8 +15,10 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
     private String email;
-    @ManyToOne @JoinColumn(name = "supervisor_id") @Nullable
+    @ManyToOne @JoinColumn(name = "supervisor_id") @Nullable @JsonIgnore
     private Supervisor supervisor;
+
+    private Long sId;
 
     public Student() {
     }
@@ -31,12 +34,21 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "studentID=" + studentId +
+                "studentId=" + studentId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", supervisor=" + supervisor +
+                ", sId=" + sId +
                 '}';
+    }
+
+    public Long getsId() {
+        return sId;
+    }
+
+    public void setsId(Long sId) {
+        this.sId = sId;
     }
 
     public Long getStudentId() {

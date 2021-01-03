@@ -9,114 +9,138 @@
 </head>
 <body>
 <div>
-    <h1>Add student:</h1>
-    <form action="/saveStudent" method="post">
+    <h1>Add person:</h1>
+    <form id="createForm">
+        <select name="types" id="types">
+            <option value="student">Student</option>
+            <option value="supervisor">Supervisor</option>
+        </select><br>
         <input type="text" placeholder="First name" id="firstName" name="firstName"><br>
         <input type="text" placeholder="Last name" id="lastName" name="lastName"><br>
         <input type="text" placeholder="Email" id="email" name="email"><br>
-        <select name="supervisorId">
-            <option selected value="-1">No supervisor</option>
-            <option th:each="supervisor : ${supervisors}"
-                    th:value="${supervisor.getSupervisorId()}"
-                    th:text="${supervisor.getSupervisorId()} + ': ' + ${supervisor.getLastName()} + ', ' + ${supervisor.getFirstName()}"></option>
-        </select> <br>
-        <input type="submit" value="Add student">
+            <select name="sId" id="sId">
+                <option selected value="-1">No supervisor/Is a supervisor</option>
+                <option th:each="supervisor : ${supervisors}"
+                        th:value="${supervisor.getSupervisorId()}"
+                        th:text="${supervisor.getSupervisorId()} + ': ' + ${supervisor.getLastName()} + ', ' + ${supervisor.getFirstName()}"></option>
+            </select><br>
+        <input type="submit">
     </form>
 </div>
+<!--<div>-->
+<!--    <h1>Add student:</h1>-->
+<!--    <form action="/saveStudent" method="post">-->
+<!--        <input type="text" placeholder="First name" id="firstName" name="firstName"><br>-->
+<!--        <input type="text" placeholder="Last name" id="lastName" name="lastName"><br>-->
+<!--        <input type="text" placeholder="Email" id="email" name="email"><br>-->
+<!--        <select name="supervisorId">-->
+<!--            <option selected value="-1">No supervisor</option>-->
+<!--            <option th:each="supervisor : ${supervisors}"-->
+<!--                    th:value="${supervisor.getSupervisorId()}"-->
+<!--                    th:text="${supervisor.getSupervisorId()} + ': ' + ${supervisor.getLastName()} + ', ' + ${supervisor.getFirstName()}"></option>-->
+<!--        </select> <br>-->
+<!--        <input type="submit" value="Add student">-->
+<!--    </form>-->
+<!--</div>-->
 
-<div>
     <h1>List of students:</h1>
-        <table id="studentTable" style="width: 75%">
-        <colgroup>
-            <col width="30%">
-            <col width="25%">
-            <col width="25%">
-            <col width="20%">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Supervisor</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.getLastName()} + ', ' + ${student.getFirstName()}"></td>
-            <td th:text="${student.getEmail()}"></td>
-            <td th:if="${student.getSupervisor() != null}"
-                th:text="${student.getSupervisor.getSupervisorId()} + ': ' +
-                         ${student.getSupervisor.getLastName()} + ', ' +
-                         ${student.getSupervisor.getFirstName()}"></td>
-            <td th:if="${student.getSupervisor() == null}">No supervisor</td>
-            <td>
-                <a th:href="@{'/deleteStudent/' + ${student.getStudentId()}}" onclick="return confirm('Are you sure you want to delete the student?')">
-                    <button>
-                        Delete
-                    </button>
-                </a>
-                <a th:href="@{'/saveStudent/' + ${student.getStudentId()}}">
-                    <button style="float: right">
-                        Update
-                    </button>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div>
-    <h1>Add supervisor:</h1>
-    <form action="/saveSupervisor" method="post">
-        <input type="text" placeholder="First name" id="firstName" name="firstName"><br>
-        <input type="text" placeholder="Last name" id="lastName" name="lastName"><br>
-        <input type="text" placeholder="Email" id="email" name="email"><br>
-        <input type="submit" value="Add supervisor">
-    </form>
-</div>
-<div>
-    <h1>List of supervisors</h1>
-    <table style="width: 75%">
-        <colgroup>
-            <col width="35%">
-            <col width="35%">
-            <col width="10%">
-            <col width="20%">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="supervisor : ${supervisors}">
-            <td th:text="${supervisor.getLastName()} + ', ' + ${supervisor.getFirstName()}"></td>
-            <td th:text="${supervisor.getEmail()}"></td>
-            <td>
-                <a th:href="@{'/showStudents/' + ${supervisor.getSupervisorId()}}">
-                    <button>Show students</button>
-                </a>
-            </td>
-            <td>
-                <a th:href="@{'/deleteSupervisor/' + ${supervisor.getSupervisorId()}}" onclick="return confirm('Are you sure you want to delete the supervisor?')">
-                    <button>Delete</button>
-                </a>
-                <a style="float: right" th:href="@{'/saveSupervisor/' + ${supervisor.getSupervisorId()}}">
-                    <button>Update</button>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<div id="studentList"></div>
+<h1>List of supervisors:</h1>
+<div id="supervisorList"></div>
+<!--<div>-->
+<!--    <h1>List of students:</h1>-->
+<!--        <table id="studentTable" style="width: 75%">-->
+<!--        <colgroup>-->
+<!--            <col width="30%">-->
+<!--            <col width="25%">-->
+<!--            <col width="25%">-->
+<!--            <col width="20%">-->
+<!--        </colgroup>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Supervisor</th>-->
+<!--            <th></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="student : ${students}">-->
+<!--            <td th:text="${student.getLastName()} + ', ' + ${student.getFirstName()}"></td>-->
+<!--            <td th:text="${student.getEmail()}"></td>-->
+<!--            <td th:if="${student.getSupervisor() != null}"-->
+<!--                th:text="${student.getSupervisor.getSupervisorId()} + ': ' +-->
+<!--                         ${student.getSupervisor.getLastName()} + ', ' +-->
+<!--                         ${student.getSupervisor.getFirstName()}"></td>-->
+<!--            <td th:if="${student.getSupervisor() == null}">No supervisor</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/deleteStudent/' + ${student.getStudentId()}}" onclick="return confirm('Are you sure you want to delete the student?')">-->
+<!--                    <button>-->
+<!--                        Delete-->
+<!--                    </button>-->
+<!--                </a>-->
+<!--                <a th:href="@{'/saveStudent/' + ${student.getStudentId()}}">-->
+<!--                    <button style="float: right">-->
+<!--                        Update-->
+<!--                    </button>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <h1>Add supervisor:</h1>-->
+<!--    <form action="/saveSupervisor" method="post">-->
+<!--        <input type="text" placeholder="First name" id="firstName" name="firstName"><br>-->
+<!--        <input type="text" placeholder="Last name" id="lastName" name="lastName"><br>-->
+<!--        <input type="text" placeholder="Email" id="email" name="email"><br>-->
+<!--        <input type="submit" value="Add supervisor">-->
+<!--    </form>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <h1>List of supervisors</h1>-->
+<!--    <table style="width: 75%">-->
+<!--        <colgroup>-->
+<!--            <col width="35%">-->
+<!--            <col width="35%">-->
+<!--            <col width="10%">-->
+<!--            <col width="20%">-->
+<!--        </colgroup>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Email</th>-->
+<!--            <th></th>-->
+<!--            <th></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="supervisor : ${supervisors}">-->
+<!--            <td th:text="${supervisor.getLastName()} + ', ' + ${supervisor.getFirstName()}"></td>-->
+<!--            <td th:text="${supervisor.getEmail()}"></td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/showStudents/' + ${supervisor.getSupervisorId()}}">-->
+<!--                    <button>Show students</button>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/deleteSupervisor/' + ${supervisor.getSupervisorId()}}" onclick="return confirm('Are you sure you want to delete the supervisor?')">-->
+<!--                    <button>Delete</button>-->
+<!--                </a>-->
+<!--                <a style="float: right" th:href="@{'/saveSupervisor/' + ${supervisor.getSupervisorId()}}">-->
+<!--                    <button>Update</button>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
 <script type="text/javascript">
-    // checkJQuery();
-    // preventCreateFormFromSending($("#createForm"));
-    // getAllStudents();
+    checkJQuery();
+    preventCreateFormFromSending($("#createForm"));
+    getAllStudents();
+    getAllSupervisors();
 </script>
 </body>
 </html>

@@ -6,10 +6,7 @@ import emilnordahn.programming2exam.repository.StudentRepository;
 import emilnordahn.programming2exam.service.StudentService;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StudentJPA implements StudentService {
@@ -20,10 +17,10 @@ public class StudentJPA implements StudentService {
     }
 
     @Override
-    public Set<Student> findAll() {
-        Set<Student> set = new HashSet<>();
-        sr.findAll().forEach(set::add);
-        return set;
+    public ArrayList<Student> findAll() {
+        ArrayList<Student> students = new ArrayList<>();
+        sr.findAll().forEach(students::add);
+        return students;
     }
 
     @Override

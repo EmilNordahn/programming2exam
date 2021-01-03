@@ -5,10 +5,7 @@ import emilnordahn.programming2exam.repository.SupervisorRepository;
 import emilnordahn.programming2exam.service.SupervisorService;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class SupervisorJPA implements SupervisorService {
@@ -18,10 +15,10 @@ public class SupervisorJPA implements SupervisorService {
         this.sr = sr;
     }
     @Override
-    public Set<Supervisor> findAll() {
-        Set<Supervisor> set = new HashSet<>();
-        sr.findAll().forEach(set::add);
-        return set;
+    public ArrayList<Supervisor> findAll() {
+        ArrayList<Supervisor> supervisors = new ArrayList<>();
+        sr.findAll().forEach(supervisors::add);
+        return supervisors;
     }
 
     @Override
